@@ -14,9 +14,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:frontend": "tsc --watch",
+    "dev:frontend": "npm start --prefix client",
     "dev:backend": "ts-node-dev server.ts",
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
+    "dev:compilertest":"tsc --watch",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:compilertest\" ",
+    "start": "node server.ts"
   },
   "keywords": [],
   "author": "",
