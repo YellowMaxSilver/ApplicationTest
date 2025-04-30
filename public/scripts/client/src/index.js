@@ -8,7 +8,7 @@ const client_1 = __importDefault(require("react-dom/client"));
 require("./index.css");
 //import App from './App';
 const reportWebVitals_1 = __importDefault(require("./reportWebVitals"));
-const script_1 = require("./script");
+const App_1 = __importDefault(require("./App"));
 const myFirst = <h1>Hello World</h1>;
 const divStyle = {
     border: "2px solid green",
@@ -17,15 +17,20 @@ const divStyle = {
     justifyContent: "center",
     boxShadow: "0px 0px 10px black"
 };
-(0, script_1.superFacaReact)();
-const primitiveDiv = <div style={divStyle}>{myFirst}</div>;
-const root = client_1.default.createRoot(document.getElementById('root'));
-root.render(primitiveDiv);
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
+// const root = ReactDOM.createRoot(
+//   document.getElementById('root') as HTMLElement
 // );
+// root.render();
+const App = () => {
+    return (<div className='App'>
+      <h1>FireBase Teste</h1>
+      <App_1.default />
+    </div>);
+};
+const root = client_1.default.createRoot(document.getElementById('root'));
+root.render(<react_1.default.StrictMode>
+    <App />
+  </react_1.default.StrictMode>);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

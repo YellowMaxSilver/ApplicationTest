@@ -32,11 +32,23 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 // import logo from './logo.svg';
 require("./App.css");
 //import ReactDOM from 'react-dom/client';
+const firebase_1 = require("./types/firebase");
+const auth_1 = require("firebase/auth");
+const firestore_1 = require("firebase/firestore");
 const App = () => {
     const [message, setMessage] = (0, react_1.useState)('');
     (0, react_1.useEffect)(() => {
@@ -48,6 +60,46 @@ const App = () => {
       <h1>{message}</h1>
     </div>);
 };
+const AuthComponent = () => {
+    const [email, setEmail] = (0, react_1.useState)('');
+    const [password, setPassword] = (0, react_1.useState)('');
+    const [description, setDescription] = (0, react_1.useState)('');
+    const [name, setName] = (0, react_1.useState)('');
+    const handleSignUp = () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const userCredential = yield (0, auth_1.createUserWithEmailAndPassword)(firebase_1.auth, email, password);
+            const user = userCredential.user;
+            alert("usuário criado!!!");
+            yield (0, firestore_1.addDoc)((0, firestore_1.collection)(firebase_1.firestore, 'usersInfo'), {
+                uid: user.uid,
+                email: user.email,
+                name: name,
+                description: description
+            });
+        }
+        catch (error) {
+            alert('erro ao criar o usuário' + error);
+        }
+    });
+    const handleLogin = () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            yield (0, auth_1.signInWithEmailAndPassword)(firebase_1.auth, email, password);
+            alert('Usuario logado com sucesso!!!');
+        }
+        catch (error) {
+            alert('erro ao logar: ');
+        }
+    });
+    return (<div>
+      <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='email'></input>
+      <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
+      <input type='text' value={name} onChange={(e) => { setName(e.target.value); }} placeholder='Your name'/>
+      <input type='text' value={description} onChange={(e) => { setDescription(e.target.value); }} placeholder='Your description'/>
+      <button onClick={handleSignUp}>Sign Up</button>
+      <button onClick={handleLogin}>Sign In</button>
+    </div>);
+};
+exports.default = AuthComponent;
 // function App() {
 //   return (
 //     <div className="App">
@@ -68,4 +120,4 @@ const App = () => {
 //     </div>
 //   );
 // }
-exports.default = App;
+//export default App;

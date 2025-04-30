@@ -7,6 +7,7 @@
   "dependencies": {
     "concurrently": "^9.1.2",
     "express": "^5.1.0",
+    "firebase": "^11.6.1",
     "ts-node-dev": "^2.0.0"
   },
   "name": "applicationtest",
@@ -16,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:frontend": "npm start --prefix client",
     "dev:backend": "ts-node-dev server.ts",
-    "dev:compilertest":"tsc --watch",
+    "dev:compilertest": "tsc --watch",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:compilertest\" ",
     "start": "node server.ts"
   },

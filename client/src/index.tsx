@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {HTMLInputTypeAttribute, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {superFacaReact} from './script';
+import {superFacaReact} from './types/script';
+
+import AuthComponent from './App';
 
 const myFirst = <h1>Hello World</h1>;
 
@@ -15,19 +17,31 @@ const divStyle = {
   boxShadow:"0px 0px 10px black"
 };
 
-superFacaReact();
 
-const primitiveDiv = <div style={divStyle}>{myFirst}</div>;
+// const root = ReactDOM.createRoot(
+//   document.getElementById('root') as HTMLElement
+// );
+// root.render();
+
+const App:React.FC = ()=>{
+  return(
+    <div className='App'>
+      <h1>FireBase Teste</h1>
+      <AuthComponent/>
+    </div>
+  );
+};
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(primitiveDiv);
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
